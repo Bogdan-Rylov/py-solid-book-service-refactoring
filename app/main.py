@@ -1,6 +1,6 @@
 import json
-import xml.etree.ElementTree as ET
 from abc import ABC, abstractmethod
+from xml.etree import ElementTree
 
 
 class DisplayMethod(ABC):
@@ -50,16 +50,16 @@ class JSONSerialization(SerializationMethod):
 
 class XMLSerialization(SerializationMethod):
     def serialize(self, title: str, content: str) -> str:
-        root = ET.Element("book")
-        title_elem = ET.SubElement(root, "title")
+        root = ElementTree.Element("book")
+        title_elem = ElementTree.SubElement(root, "title")
         title_elem.text = title
-        content_elem = ET.SubElement(root, "content")
+        content_elem = ElementTree.SubElement(root, "content")
         content_elem.text = content
-        return ET.tostring(root, encoding="unicode")
+        return ElementTree.tostring(root, encoding="unicode")
 
 
 class Book:
-    def __init__(self, title: str, content: str):
+    def __init__(self, title: str, content: str) -> None:
         self.title = title
         self.content = content
 
